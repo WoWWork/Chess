@@ -115,11 +115,13 @@ function uciToCoords(moveStr) {
 			
 			currentPlayer
 		});
-		
-    board[toRow][toCol] = board[fromRow][fromCol];
-	board[fromRow][fromCol] = null;
 	from = {row:fromRow, col:fromCol};
 	to = {row:toRow, col:toCol};
+	
+	enPassant(board[from.row][from.col], from, to);
+	
+    board[toRow][toCol] = board[fromRow][fromCol];
+	board[fromRow][fromCol] = null;
 	
 	castling(board[toRow][toCol], from, to);
 	
