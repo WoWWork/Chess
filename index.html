@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JavaScript Chess Game</title>
+  <link href="css/chess.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+  <div class="sidebar" id="sidebar">
+    <div id="status">White's Turn</div><br>
+    <div id="undoBtn"><button onclick=undoMove()>Undo Move</button></div><br>
+  </div>
+  <div id="board"></div>
+  <script type="text/javascript" src="js/play.js"></script>
+  <script type="text/javascript" src="js/AI.js"></script>
+  <script>
+	sidebar.addEventListener("click", () => {
+		if (sidebar.classList.contains("open")) {
+			sidebar.classList.remove("open");
+		} else {
+			sidebar.classList.add("open");
+		}
+	});
+  </script>
+</body>
+</html>
