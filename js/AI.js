@@ -41,6 +41,7 @@ function askAI(workerUrl, situation, depth = '10') {
 	  .catch(error => console.error('無法載入或建立 Stockfish Worker:', error));
 	  
 	currentPlayer = currentPlayer === "white" ? "black" : "white";
+	
 }
 	
 function boardToFen(boardArray) {
@@ -134,4 +135,4 @@ function uciToCoords(moveStr) {
 	}
 }
 
-renderBoard();
+setInterval(renderBoard, 1000);
