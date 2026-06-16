@@ -302,7 +302,7 @@ function isValidMove(piece, from, to, ignoreCheck = false) {
 						!isSquareAttacked(0, 4, "white") &&
 						!isSquareAttacked(0, 5, "white") &&
 						!isSquareAttacked(0, 6, "white") &&
-						board[7][0]
+						board[0][7]
 					) {
 						moved.blackKing = true;
 						moved.blackRookH = true;
