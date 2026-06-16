@@ -131,7 +131,8 @@ function uciToCoords(moveStr) {
 		if(promotion === 'r' || promotion === 'R') board[toRow][toCol].type = "rook";
 		if(promotion === 'n' || promotion === 'N') board[toRow][toCol].type = "knight";
 		if(promotion === 'b' || promotion === 'B') board[toRow][toCol].type = "bishop";
-		board[toRow][toCol].nick = promotion;
+		board[toRow][toCol].color = PCColor === "white" ? "white" : "black";
+		board[toRow][toCol].nick = PCColor === "white" ? promotion.toUpperCase() : promotion.toLowerCase();
 	}
 }
 

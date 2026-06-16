@@ -109,7 +109,7 @@ function handleClick(row,col) {
         if(piece && piece.color === currentPlayer) {
             selected = {row,col};    
         }
-		renderBoard();
+		//renderBoard();
         return;
     }
 
@@ -176,7 +176,7 @@ function handleClick(row,col) {
     }
 
     selected = null;
-    renderBoard();
+    //renderBoard();
 }
 
 function isValidMove(piece, from, to, ignoreCheck = false) {
@@ -328,7 +328,6 @@ function isValidMove(piece, from, to, ignoreCheck = false) {
 					}
 				}
 			}
-
 			return false;
     }
 	
@@ -428,20 +427,20 @@ function undoMove() {
 
     selected = null;
 
-    renderBoard();
+    //renderBoard();
 }
 
 function castling(piece, from, to) {
 	// WHITE castling rook move
 	if (piece.type === "king" && from.row === 7 && from.col === 4) {
 		// king-side
-		if (board[7][7].type === "rook" && board[7][7].color === "white" && to.row === 7 && to.col === 6) {
+		if (board[7][7] && board[7][7].type === "rook" && board[7][7].color === "white" && to.row === 7 && to.col === 6) {
 			board[7][5] = board[7][7];
 			board[7][7] = null;
 		}
 
 		// queen-side
-		if (board[7][0].type === "rook" && board[7][0].color === "white" && to.row === 7 && to.col === 2) {
+		if (board[7][0] && board[7][0].type === "rook" && board[7][0].color === "white" && to.row === 7 && to.col === 2) {
 			board[7][3] = board[7][0];
 			board[7][0] = null;
 		}
@@ -470,13 +469,13 @@ function castling(piece, from, to) {
 	// BLACK castling rook move
 	if (piece.type === "king" && from.row === 0 && from.col === 4) {
 		// king-side
-		if (board[0][7].type === "rook" && board[0][7].color === "black" && to.row === 0 && to.col === 6) {
+		if (board[0][7] && board[0][7].type === "rook" && board[0][7].color === "black" && to.row === 0 && to.col === 6) {
 			board[0][5] = board[0][7];
 			board[0][7] = null;
 		}
 
 		// queen-side
-		if (board[0][0].type === "rook" && board[0][0].color === "black" && to.row === 0 && to.col === 2) {
+		if (board[0][0] && board[0][0].type === "rook" && board[0][0].color === "black" && to.row === 0 && to.col === 2) {
 			board[0][3] = board[0][0];
 			board[0][0] = null;
 		}
@@ -537,7 +536,8 @@ function promotePawn(row, col) {
 function enPassant(piece, from, to) {
 	let dir = piece.color === "white" ? -1 : 1;
 	
-	if (piece.type === "pawn" &&
+	if (piece.type === "pawn" && 
+		moveHistory[moveHistory.length - 1].capturedPiece === null &&
 		board[to.row - dir][to.col] &&
 		board[to.row - dir][to.col].type === "pawn" &&
 		piece.color !== board[to.row - dir][to.col].color 
