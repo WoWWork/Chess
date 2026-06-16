@@ -528,9 +528,9 @@ function promotePawn(row, col) {
 
     board[row][col] = {
         type: choice,
-        color: piece.color
+        color: piece.color,
+		nick: currentPlayer === "white" ? choice[0].toUpperCase : choice[0].toLowerCase()
     };
-	board[row][col].nick = currentPlayer === "white" ? choice[0].toUpperCase : choice[0].toLowerCase();
 }
 
 function enPassant(piece, from, to) {
