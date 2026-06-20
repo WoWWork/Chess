@@ -266,8 +266,6 @@ function isValidMove(piece, from, to, ignoreCheck = false) {
 						!isSquareAttacked(7, 6, "black") && 
 						board[7][7]
 					) {
-						moved.whiteKing = true;
-						moved.whiteRookH = true;
 						return true;
 					}
 				}
@@ -284,8 +282,6 @@ function isValidMove(piece, from, to, ignoreCheck = false) {
 						!isSquareAttacked(7, 2, "black") &&
 						board[7][0]
 					) {
-						moved.whiteKing = true;
-						moved.whiteRookA = true;
 						return true;
 					}
 				}
@@ -304,8 +300,6 @@ function isValidMove(piece, from, to, ignoreCheck = false) {
 						!isSquareAttacked(0, 6, "white") &&
 						board[0][7]
 					) {
-						moved.blackKing = true;
-						moved.blackRookH = true;
 						return true;
 					}
 				}
@@ -322,8 +316,6 @@ function isValidMove(piece, from, to, ignoreCheck = false) {
 						!isSquareAttacked(0, 2, "white") &&
 						board[0][0]
 					) {
-						moved.blackKing = true;
-						moved.blackRookA = true;
 						return true;
 					}
 				}
@@ -437,12 +429,16 @@ function castling(piece, from, to) {
 		if (board[7][7] && board[7][7].type === "rook" && board[7][7].color === "white" && to.row === 7 && to.col === 6) {
 			board[7][5] = board[7][7];
 			board[7][7] = null;
+			moved.whiteKing = true;
+			moved.whiteRookH = true;
 		}
 
 		// queen-side
 		if (board[7][0] && board[7][0].type === "rook" && board[7][0].color === "white" && to.row === 7 && to.col === 2) {
 			board[7][3] = board[7][0];
 			board[7][0] = null;
+			moved.whiteKing = true;
+			moved.whiteRookA = true;
 		}
 	}
 	
@@ -472,12 +468,16 @@ function castling(piece, from, to) {
 		if (board[0][7] && board[0][7].type === "rook" && board[0][7].color === "black" && to.row === 0 && to.col === 6) {
 			board[0][5] = board[0][7];
 			board[0][7] = null;
+			moved.blackKing = true;
+			moved.blackRookH = true;
 		}
 
 		// queen-side
 		if (board[0][0] && board[0][0].type === "rook" && board[0][0].color === "black" && to.row === 0 && to.col === 2) {
 			board[0][3] = board[0][0];
 			board[0][0] = null;
+			moved.blackKing = true;
+			moved.blackRookA = true;
 		}
 	}
 	

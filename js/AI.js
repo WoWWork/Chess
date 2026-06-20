@@ -4,6 +4,9 @@ function askAI(workerUrl, situation, depth = '10') {
 	if (currentPlayer !== PCColor || selected) return;
 
 	let side = PCColor === "white" ? ' w' : ' b';
+	
+	let fenCastling = getFenCastling();
+	
 	// 透過 fetch 抓取腳本內容並包裝
 	fetch(workerUrl)
 	  .then(response => response.text())
@@ -31,7 +34,7 @@ function askAI(workerUrl, situation, depth = '10') {
 		window.stockfish.postMessage('ucinewgame');
 
 		// Define a board position (This layout is the baseline starting board position)
-		const startingFen = situation + side + ' KQkq - 0 1';
+		const startingFen = situation + side + ' ' + fenCastling + ' - 0 1';
 		window.stockfish.postMessage(`position fen ${startingFen}`);
 
 		// 4. Start analysis (Search until 10 calculations deep)
@@ -42,6 +45,25 @@ function askAI(workerUrl, situation, depth = '10') {
 	  
 	currentPlayer = currentPlayer === "white" ? "black" : "white";
 	
+}
+
+function getFenCastling() {
+    let fen = "";
+
+    // White castling rights
+    if (!moved.whiteKing) {
+        if (!moved.whiteRookH) fen += "K";
+        if (!moved.whiteRookA) fen += "Q";
+    }
+
+    // Black castling rights
+    if (!moved.blackKing) {
+        if (!moved.blackRookH) fen += "k";
+        if (!moved.blackRookA) fen += "q";
+    }
+
+    // If string is empty, return "-"
+    return fen || "-";
 }
 	
 function boardToFen(boardArray) {
