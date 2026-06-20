@@ -529,7 +529,7 @@ function promotePawn(row, col) {
     board[row][col] = {
         type: choice,
         color: piece.color,
-		nick: currentPlayer === "white" ? choice[0].toUpperCase : choice[0].toLowerCase()
+		nick: piece.color === "white" ? choice[0].toUpperCase() : choice[0].toLowerCase()
     };
 }
 
