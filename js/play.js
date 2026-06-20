@@ -248,7 +248,7 @@ function isValidMove(piece, from, to, ignoreCheck = false) {
         case "king":
             if (Math.abs(dx) <= 1 && Math.abs(dy) <= 1) {
 				if(piece.color === "white") moved.whiteKing = true;
-				else moved.whiteKing = true;
+				else moved.blackKing = true;
 				return true;
 			}
 

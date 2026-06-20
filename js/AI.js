@@ -96,6 +96,11 @@ function uciToCoords(moveStr) {
     // 如果有第 5 個字元（如 e7e8q），代表是兵的升變 (promotion)
     const promotion = moveStr[4] || null;
 	
+	if(PCColor !== board[fromRow][fromCol].color) {
+		console.log("resign");
+		return;
+	}
+	
 	moveHistory.push({
 			from: {
 				row: fromRow,
